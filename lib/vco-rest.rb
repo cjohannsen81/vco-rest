@@ -1,11 +1,11 @@
 require 'rest_client'
 
-class Vco 
-  def self.workflows
-   return RestClient.get "http://vcoadmin:vcoadmin@192.168.75.145:8280/api/workflows"
+class VCO 
+  def self.workflows(user, pass, server)
+   return RestClient.get "http://#{user}:#{pass}@#{server}:8280/api/workflows"
   end
 
-  def self.actions
-   return RestClient.get "http://vcoadmin:vcoadmin@192.168.75.145:8280/api/workflows"
+  def self.actions(user, pass, server)
+   return RestClient.get "http://#{user}:#{pass}@#{server}:8280/api/actions"
   end
 end
