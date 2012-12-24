@@ -1,11 +1,35 @@
 require 'rest_client'
+require 'nokogiri'
 
 class VCO 
+  def self.schema(server)
+   xml_data = RestClient.get( "http://#{server}:8280/api/schema", :content_type => 'application/xml', :accept => 'application/xml')
+   reader = Nokogiri::XML::Reader(xml_data)
+    reader.each do |node| p node.name
+     if node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
+      p node.attributes()
+     end
+    end
+  end
+
   def self.workflows(user, pass, server)
-   return RestClient.get "http://#{user}:#{pass}@#{server}:8280/api/workflows"
+   xml_data = RestClient.get( "http://#{user}:#{pass}@#{server}:8280/api/workflows", :content_type => 'application/xml', :accept => 'application/xml')
+   reader = Nokogiri::XML::Reader(xml_data)
+    reader.each do |node| p node.name
+     if node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
+      p node.attributes()
+     end
+    end
   end
 
   def self.actions(user, pass, server)
-   return RestClient.get "http://#{user}:#{pass}@#{server}:8280/api/actions"
+   xml_data = RestClient.get( "http://#{user}:#{pass}@#{server}:8280/api/actions", :content_type => 'application/xml', :accept => 'application/xml')
+   reader = Nokogiri::XML::Reader(xml_data)
+    reader.each do |node| p node.name
+     if node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
+      p node.attributes()
+     end
+    end
   end
+
 end
